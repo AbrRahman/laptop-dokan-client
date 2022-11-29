@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
-    const { user } = useContext(AuthContext);
-    console.log(user.displayName)
+    const { signUpWidthEmailPassword } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const handelEmailPasswordRegister = (data) => {
         const name = data.name;
@@ -24,6 +23,13 @@ const Register = () => {
                 console.log(result.data.url)
             }).catch(err => {
                 console.log(err)
+            })
+        signUpWidthEmailPassword(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            }).catch(err => {
+                console.log(err.message)
             })
     }
     return (
