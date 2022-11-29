@@ -5,6 +5,10 @@ const Header = () => {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/dashbord'>Dashbord</Link></li>
+        <>
+            <li><Link to='/login'>Login</Link></li>
+            <li><Link to='register'>Register</Link></li>
+        </>
     </>
     return (
         <section className="max-w-[1440px] mx-auto">

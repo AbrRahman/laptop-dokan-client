@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Register = () => {
+const Login = () => {
     return (
         <div>
             <div className="hero bg-base-200 ">
@@ -10,30 +10,9 @@ const Register = () => {
                             <form>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Enter Name</span>
-                                    </label>
-                                    <input type="text" placeholder="Enter Name" className="input input-bordered" />
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
                                     <input type="email" placeholder="Enter Email" className="input input-bordered" />
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text"></span>
-                                    </label>
-                                    <input type="file" placeholder="Choose Your" className="input input-bordered" />
-                                </div>
-                                <div className="form-control w-full max-w-xs">
-                                    <label className="label">
-                                        <span className="label-text-alt">Select Option</span>
-                                    </label>
-                                    <select className="select select-bordered">
-                                        <option value='user' selected>User</option>
-                                        <option value='Seller'>seller</option>
-                                    </select>
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -57,4 +36,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default Login;
