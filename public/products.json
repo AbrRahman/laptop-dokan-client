@@ -32,7 +32,6 @@
          "verified_seller":true
     },
     {
-        "_id":13,
         "category_id":"6384c09eb9533ee1de3b434e",
         "product_name":"Dell Pavilion Laptop 15-eg2009TU",
         "picture":"https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8TGFwdG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -65,7 +64,6 @@
          "verified_seller":true
     },
     {
-        "_id":15,
         "category_id":"6384c09eb9533ee1de3b434f",
         "product_name":"Lenovo Pavilion Laptop L-eg2009TU",
         "picture":"https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8TGFwdG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -82,7 +80,6 @@
          "verified_seller":false
     },
     {
-        "_id":15,
         "category_id":"6384c09eb9533ee1de3b434f",
         "product_name":"Lenovo Pavilion Laptop 15-eg2009TU",
         "picture":"https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8TGFwdG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
