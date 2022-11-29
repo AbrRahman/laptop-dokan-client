@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+
 const Register = () => {
+    const { user } = useContext(AuthContext);
+    console.log(user.displayName)
     const { register, handleSubmit } = useForm();
     const handelEmailPasswordRegister = (data) => {
-        console.log(data)
+        const name = data.name;
+        const email = data.email;
+        const rule = data.userRule;
+        const password = data.userPassword;
+        console.log(name, email, rule, password)
+        const image = data.userPhoto[0];
+        const formData = new FormData();
+        formData.append('image', image)
+        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.REACT_APP_Imgbb}`
+        fetch(url, {
+            method: "POST",
+            body: formData
+        }).then(res => res.json())
+            .then(result => {
+                console.log(result.data.url)
+            }).catch(err => {
+                console.log(err)
+            })
     }
     return (
         <div>
@@ -43,7 +64,7 @@ const Register = () => {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="password" {...register("user password")} placeholder="Enter password" className="input input-bordered" />
+                                    <input type="password" {...register("userPassword")} placeholder="Enter password" className="input input-bordered" />
                                 </div>
                                 <div className="form-control mt-6">
                                     <button type='submit' className="btn btn-primary">Login</button>
