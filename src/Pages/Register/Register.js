@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
-    const { signUpWidthEmailPassword } = useContext(AuthContext);
+    const { signUpWithGoogle, user, signUpWidthEmailPassword, setDisplayNameAndPhotoUrl } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate()
     const handelEmailPasswordRegister = (data) => {
         const name = data.name;
         const email = data.email;
@@ -15,23 +18,97 @@ const Register = () => {
         const formData = new FormData();
         formData.append('image', image)
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.REACT_APP_Imgbb}`
+        const setNameAndPhotoUrl = {
+            displayName: name,
+        }
         fetch(url, {
             method: "POST",
             body: formData
         }).then(res => res.json())
             .then(result => {
-                console.log(result.data.url)
+                const photo = result.data.url
+                console.log(photo)
+                setNameAndPhotoUrl["photoURL"] = photo
             }).catch(err => {
                 console.log(err)
             })
         signUpWidthEmailPassword(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user)
+                if (user) {
+                    // update profile on fire base
+                    updateUserProfile(setNameAndPhotoUrl)
+                    // save user database
+                    const userData = {
+                        name,
+                        email,
+                        rule,
+                        image: setNameAndPhotoUrl.photoURL
+                    }
+
+                    const googleSignup = false
+                    insertUserDb(userData, googleSignup)
+                }
+
             }).catch(err => {
                 console.log(err.message)
             })
     }
+    // update user profile
+    const updateUserProfile = (updateInfo) => {
+        setDisplayNameAndPhotoUrl(updateInfo)
+            .then(() => {
+                console.log('user update success')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    // handel google signUp 
+    const handleGoogleSignup = () => {
+        signUpWithGoogle()
+            .then(result => {
+                const user = result.user;
+                if (user) {
+                    const userData = {
+                        name: user.displayName,
+                        email: user.email,
+                        rule: "bayer",
+                        image: user.photoURL
+                    }
+                    console.log(userData)
+                    const googleSignup = true
+                    insertUserDb(userData, googleSignup)
+                }
+            }).catch(err => {
+                console.log(err.message)
+            })
+    }
+    // save user to database
+    const insertUserDb = (userData, googleSignup) => {
+        fetch("http://localhost:8000/user", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+                if (googleSignup === true) {
+                    navigate('/')
+                }
+                if (result.acknowledged === true) {
+                    toast.success("Register success")
+                    if (googleSignup === false) {
+                        navigate('/login')
+                    }
+
+                }
+            })
+    }
+
     return (
         <div>
             <div className="hero bg-base-200 ">
@@ -73,12 +150,13 @@ const Register = () => {
                                     <input type="password" {...register("userPassword")} placeholder="Enter password" className="input input-bordered" />
                                 </div>
                                 <div className="form-control mt-6">
-                                    <button type='submit' className="btn btn-primary">Login</button>
+                                    <button type='submit' className="btn btn-primary">Sign up</button>
                                 </div>
+                                <span className=''>Already have account? <Link to='/login'><small>Login</small></Link></span>
                             </form>
                             <div className="divider">OR</div>
                             <div className="form-control">
-                                <button type='submit' className="btn btn-secondary">Signup Width Google</button>
+                                <button onClick={handleGoogleSignup} type='submit' className="btn btn-secondary">Signup Width Google</button>
                             </div>
                         </div>
                     </div>
