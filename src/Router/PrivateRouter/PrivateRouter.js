@@ -4,10 +4,10 @@ import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const PrivateRouter = ({ children }) => {
     const location = useLocation();
-    const { user, loading } = useContext(AuthContext)
-    if (loading) {
-        return <div>Loading ...</div>
-    }
+    const { user, loading, setLoading } = useContext(AuthContext)
+    // if (loading) {
+    //     return <div>Loading...</div>
+    // }
     if (user && user?.uid) {
         return children
     }

@@ -1,13 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Register = () => {
+    const [createEmail, setCreateEmail] = useState('')
     const { signUpWithGoogle, user, signUpWidthEmailPassword, setDisplayNameAndPhotoUrl } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
+    const [token] = useToken(createEmail)
+    if (token) {
+        navigate('/')
+    }
     const handelEmailPasswordRegister = (data) => {
         const name = data.name;
         const email = data.email;
@@ -45,9 +50,7 @@ const Register = () => {
                         rule,
                         image: setNameAndPhotoUrl.photoURL
                     }
-
-                    const googleSignup = false
-                    insertUserDb(userData, googleSignup)
+                    insertUserDb(userData)
                 }
 
             }).catch(err => {
@@ -77,15 +80,14 @@ const Register = () => {
                         image: user.photoURL
                     }
                     console.log(userData)
-                    const googleSignup = true
-                    insertUserDb(userData, googleSignup)
+                    insertUserDb(userData)
                 }
             }).catch(err => {
                 console.log(err.message)
             })
     }
     // save user to database
-    const insertUserDb = (userData, googleSignup) => {
+    const insertUserDb = (userData) => {
         fetch("http://localhost:8000/user", {
             method: "POST",
             headers: {
@@ -96,15 +98,8 @@ const Register = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result)
-                if (googleSignup === true) {
-                    navigate('/')
-                }
                 if (result.acknowledged === true) {
-                    toast.success("Register success")
-                    if (googleSignup === false) {
-                        navigate('/login')
-                    }
-
+                    setCreateEmail(userData.email);
                 }
             })
     }
