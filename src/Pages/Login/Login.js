@@ -26,6 +26,19 @@ const Login = () => {
                 console.log(err.message)
             })
     }
+
+    const handleGoogleLogin = () => {
+        signUpWithGoogle()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                toast.success('Sign up add success')
+                navigate(from, { replace: true });
+            }).catch(err => {
+                console.log(err.message)
+            })
+    }
+
     return (
         <div>
             <div className="hero bg-base-200 ">
@@ -52,7 +65,7 @@ const Login = () => {
                             </form>
                             <div className="divider">OR</div>
                             <div className="form-control">
-                                <button type='submit' className="btn btn-secondary">Signup Width Google</button>
+                                <button onClick={handleGoogleLogin} type='submit' className="btn btn-secondary">SignIn Width Google</button>
                             </div>
                         </div>
                     </div>
