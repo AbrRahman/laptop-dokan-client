@@ -1,14 +1,31 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const handelLogOut = () => {
+        logOut()
+            .then(() => {
+                toast.success('LogOut Success')
+                navigate('/login')
+            }).catch(err => {
+                console.log(err)
+            })
+    }
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/dashbord'>Dashbord</Link></li>
-        <>
-            <li><Link to='/login'>Login</Link></li>
-            <li><Link to='register'>Register</Link></li>
-        </>
+        {
+            user ? <><button onClick={handelLogOut} className="btn btn-primary">LogOut</button></> : <>
+                <li><Link to='/login'>Login</Link></li>
+                <li><Link to='register'>Register</Link></li>
+            </>
+        }
+
     </>
     return (
         <section className="max-w-[1440px] mx-auto">
