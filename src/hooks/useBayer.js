@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const useBayer = (email) => {
     const [isBayer, setIsBayer] = useState(false);
-    const [isAdminLoading, setIsAdminLoading] = useState(true);
+    const [isBayerLoading, setIsBayerLoading] = useState(true);
     useEffect(() => {
         if (email) {
             fetch(`http://localhost:8000/user/bayer/${email}`)
@@ -11,11 +11,11 @@ const useBayer = (email) => {
                 .then(data => {
                     console.log(data);
                     setIsBayer(data.isBayer);
-                    setIsAdminLoading(false);
+                    setIsBayerLoading(false);
                 })
         }
     }, [email])
-    return [isBayer, isAdminLoading]
+    return [isBayer, isBayerLoading]
 };
 
 export default useBayer;

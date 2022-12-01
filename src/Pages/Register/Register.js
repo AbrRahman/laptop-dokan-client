@@ -16,9 +16,8 @@ const Register = () => {
     const handelEmailPasswordRegister = (data) => {
         const name = data.name;
         const email = data.email;
-        const rule = data.userRule;
+        const role = data.userRule;
         const password = data.userPassword;
-        console.log(name, email, rule, password)
         const image = data.userPhoto[0];
         const formData = new FormData();
         formData.append('image', image)
@@ -47,7 +46,7 @@ const Register = () => {
                     const userData = {
                         name,
                         email,
-                        rule,
+                        role,
                         image: setNameAndPhotoUrl.photoURL
                     }
                     insertUserDb(userData)
