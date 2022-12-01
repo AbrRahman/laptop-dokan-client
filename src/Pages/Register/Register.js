@@ -76,7 +76,7 @@ const Register = () => {
                     const userData = {
                         name: user.displayName,
                         email: user.email,
-                        rule: "bayer",
+                        role: "bayer",
                         image: user.photoURL
                     }
                     console.log(userData)
