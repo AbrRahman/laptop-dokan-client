@@ -18,11 +18,13 @@ const Header = () => {
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
-        <li><Link to='/dashbord'>Dashbord</Link></li>
         {
-            user ? <><button onClick={handelLogOut} className="btn btn-primary">LogOut</button></> : <>
+            user ? <>
+                <li><Link to='/dashboard'>Dashboard</Link></li>
+                <button onClick={handelLogOut} className="btn btn-primary">LogOut</button>
+            </> : <>
                 <li><Link to='/login'>Login</Link></li>
-                <li><Link to='register'>Register</Link></li>
+                <li><Link to='/register'>Register</Link></li>
             </>
         }
 

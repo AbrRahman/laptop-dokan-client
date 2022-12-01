@@ -17,6 +17,7 @@ const BookingModal = ({ bookingInfo, setBookingInfo }) => {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('laptopDokanTonen')}`
             },
             body: JSON.stringify(data),
         })
