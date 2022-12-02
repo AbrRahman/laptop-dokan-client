@@ -4,6 +4,7 @@ const useSeller = (email) => {
     const [isSellerLoading, setIsSellerLoading] = useState(true);
     useEffect(() => {
         if (email) {
+
             fetch(`http://localhost:8000/user/seller/${email}`)
                 .then(res => res.json())
                 .then(data => {
@@ -12,6 +13,7 @@ const useSeller = (email) => {
                     setIsSellerLoading(false);
                 })
         }
+
     }, [email])
     return [isSeller, isSellerLoading]
 };
