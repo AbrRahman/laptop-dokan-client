@@ -5,7 +5,7 @@ const useSeller = (email) => {
     useEffect(() => {
         if (email) {
 
-            fetch(`http://localhost:8000/user/seller/${email}`)
+            fetch(`https://laptop-dokan-server.vercel.app/user/seller/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

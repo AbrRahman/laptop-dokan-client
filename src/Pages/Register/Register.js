@@ -6,7 +6,7 @@ import useToken from '../../hooks/useToken';
 
 const Register = () => {
     const [createEmail, setCreateEmail] = useState('')
-    const { signUpWithGoogle, user, signUpWidthEmailPassword, setDisplayNameAndPhotoUrl } = useContext(AuthContext);
+    const { signUpWithGoogle, signUpWidthEmailPassword, setDisplayNameAndPhotoUrl } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
     const [token] = useToken(createEmail)
@@ -87,7 +87,7 @@ const Register = () => {
     }
     // save user to database
     const insertUserDb = (userData) => {
-        fetch("http://localhost:8000/user", {
+        fetch("https://laptop-dokan-server.vercel.app/user", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

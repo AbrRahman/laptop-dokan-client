@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
             { path: '/', element: <Home></Home> },
             {
                 path: '/category/:id',
-                loader: ({ params }) => fetch(`http://localhost:8000/categories/${params.id}`),
+                loader: ({ params }) => fetch(`https://laptop-dokan-server.vercel.app/categories/${params.id}`),
                 element: <PrivateRouter><CategoriesProducts></CategoriesProducts></PrivateRouter>
             },
             {

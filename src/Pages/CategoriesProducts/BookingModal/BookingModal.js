@@ -13,7 +13,7 @@ const BookingModal = ({ bookingInfo, setBookingInfo }) => {
         data.price = resale_price
         data.userName = user.displayName
         console.log(data);
-        fetch("http://localhost:8000/booking", {
+        fetch("https://laptop-dokan-server.vercel.app/booking", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ const MyOrders = () => {
     const { user, loading } = useContext(AuthContext)
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:8000/myorder/${user?.email}`)
+        fetch(`https://laptop-dokan-server.vercel.app/myorder/${user?.email}`)
             .then(res => res.json())
             .then(data => { setOrders(data) })
     }, [user?.email])

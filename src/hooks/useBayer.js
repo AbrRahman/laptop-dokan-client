@@ -6,7 +6,7 @@ const useBayer = (email) => {
     const [isBayerLoading, setIsBayerLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:8000/user/bayer/${email}`)
+            fetch(`https://laptop-dokan-server.vercel.app/user/bayer/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

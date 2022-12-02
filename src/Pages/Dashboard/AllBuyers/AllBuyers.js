@@ -5,13 +5,13 @@ const AllBuyers = () => {
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:8000/buyers');
+            const res = await fetch('https://laptop-dokan-server.vercel.app/buyers');
             const data = await res.json();
             return data;
         }
     });
     const handelDeleteUser = id => {
-        fetch(`http://localhost:8000/user/${id}`, {
+        fetch(`https://laptop-dokan-server.vercel.app/user/${id}`, {
             method: "DELETE"
         }).then(res => res.json())
             .then(data => {

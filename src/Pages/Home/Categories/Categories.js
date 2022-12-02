@@ -6,7 +6,7 @@ const Categories = () => {
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:8000/categories')
+        axios.get('https://laptop-dokan-server.vercel.app/categories')
             .then(res => setCategories(res.data))
             .catch(err => console.log(err))
     }, [])

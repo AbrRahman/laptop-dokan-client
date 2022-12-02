@@ -45,7 +45,7 @@ const AddProduct = () => {
             }).catch(err => {
                 console.log(err)
             })
-        fetch("http://localhost:8000/myproduct", {
+        fetch("https://laptop-dokan-server.vercel.app/myproduct", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const AddProduct = () => {
 
     }
     useEffect(() => {
-        fetch('http://localhost:8000/categories')
+        fetch('https://laptop-dokan-server.vercel.app/categories')
             .then(res => res.json())
             .then(data => setCategory(data))
     }, [])
